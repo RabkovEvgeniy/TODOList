@@ -9,31 +9,34 @@ def show_create_menu(tasks: list):
 
 
 def show_delete_menu(tasks: list):
-    print("введите номер задачи для удаления: ")
+    print("Введите номер задачи для удаления: ")
     for index in range(len(tasks)):
         print(f"{index} {tasks[index]}")
-    index= int(input("введите номер задачи, которую вы хотите удалить"))
-    if index > len(tasks) or index < 0:
-        print("Введите номер сущетсвующей задачи")
-        return 
+    print(f"{len(tasks)} Назад")
+    
+    index = int(input("Номер задачи: "))
+    if index == len(tasks):
+        print()
+        return
     delete_task(tasks , index)
+    print()
 
 
 def delete_task (tasks: list, index: int):
+    if index < 0:
+        raise Exception("Индекс не должен быть отрицательным")
     tasks.pop(index)
 
 
-
 def show_all(tasks: list):
-    print("Все задачи: ")
+    print("Все задачи (нажмите Enter для выхода): ")
     for index in range(len(tasks)):
         print(f"{index} {tasks[index]}")
-    input("Нажмите Enter:\n")
+    input("\n")
     
 
-
 def close_app(tasks: list):
-    exit()
+    exit(0)
 
 
 def show_start_menu(tasks: list):
@@ -45,17 +48,24 @@ def show_start_menu(tasks: list):
     action_number = input("Номер действия: ")
     print()
     
-    if action_number == "1":
-        show_create_menu(tasks)
-    elif action_number == "2":
-        show_delete_menu(tasks)
-    elif action_number == "3":
-        show_all(tasks)
-    elif action_number == "4":
+    try:
+        if action_number == "1":
+            show_create_menu(tasks)
+            return
+        if action_number == "2":
+            show_delete_menu(tasks)
+            return
+        if action_number == "3":
+            show_all(tasks)
+            return 
+    except:
+        print("Что-то пошло не так!\n")
+        return
+        
+    if action_number == "4":
         close_app(tasks)
-    else:
-        print("По человечески же написанно от 1 до 4!!!")
-        input("Нажмите Enter:\n")
+         
+    input("По человечески же написанно от 1 до 4!!! (Нажмите Enter для выхода:)\n")
     
     
 def main():
