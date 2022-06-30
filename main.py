@@ -32,7 +32,7 @@ def show_all(tasks: list):
     print("Все задачи (нажмите Enter для выхода): ")
     for index in range(len(tasks)):
         print(f"{index} {tasks[index]}")
-    input("\n")
+    input("")
     
 
 def close_app(tasks: list):
@@ -66,12 +66,19 @@ def show_start_menu(tasks: list):
         close_app(tasks)
          
     input("По человечески же написанно от 1 до 4!!! (Нажмите Enter для выхода:)\n")
+
+def init_app_state():
+    tasks = []
+    with open("tasks.txt", "r", encoding ="utf-8") as tasks_file:
+        tasks = tasks_file.readlines()
     
+    for index in range(len(tasks)):
+        tasks[index] = tasks[index].strip("\n")
+    return tasks
     
 def main():
-    tasks = []
+    tasks = init_app_state()
     while True:
         show_start_menu(tasks)
-
 
 main()
