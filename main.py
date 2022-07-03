@@ -36,6 +36,9 @@ def show_all(tasks: list):
     
 
 def close_app(tasks: list):
+    with open("tasks.txt", "w", encoding ="utf-8") as tasks_file:
+        for task in tasks:
+            tasks_file.write(task + "\n")
     exit(0)
 
 
